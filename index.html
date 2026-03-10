@@ -21,26 +21,42 @@ overflow-x:hidden;
 
 .sparkle{
 position:fixed;
-width:2px;
-height:2px;
 background:white;
 border-radius:50%;
-opacity:0.8;
-animation:twinkle 2s infinite alternate;
+opacity:0.9;
+animation:twinkle infinite alternate;
 }
+
+/* brillo */
 
 @keyframes twinkle{
 from{opacity:0.2;}
 to{opacity:1;}
 }
 
-/* ---------- CONTENIDO ---------- */
+/* ---------- TITULO ---------- */
 
 header{
-padding:40px;
+padding:25px 40px;
 font-size:40px;
 font-weight:bold;
+display:inline-block;
+margin-top:30px;
+
+background:rgba(255,255,255,0.85);
+color:black;
+
+border-radius:25px;
+border:3px solid white;
+
+box-shadow:
+0 0 20px rgba(255,255,255,0.8),
+0 0 40px rgba(255,255,255,0.4);
+
+backdrop-filter:blur(6px);
 }
+
+/* ---------- CONTENIDO ---------- */
 
 main{
 padding:20px;
@@ -169,7 +185,7 @@ transform:translateY(-140px);
 
 <div class="description">
 Ahora si mucha suere el dia de hoy en tu entrevista vaquerita
-  Puedes conquistar el lejano oeste si te lo propones ❤️
+Puedes conquistar el lejano oeste si te lo propones ❤️
 </div>
 
 <img src="she.jpg" style="max-width:400px;border-radius:10px;">
@@ -192,7 +208,7 @@ Abrir Carta 💌
 
 <div class="letter">
 Si te pones nerviosa no lo olvides, eres alguien capaz, con energia, experiencia, chula y tienes todo lo necesario asi que solo se
-  tu y todo saldra bien. Te amo. ❤️
+tu y todo saldra bien. Te amo. ❤️
 </div>
 
 </div>
@@ -201,23 +217,37 @@ Si te pones nerviosa no lo olvides, eres alguien capaz, con energia, experiencia
 
 <script>
 
-/* DESTELLOS */
+/* DESTELLOS (MEJORADOS) */
 
 function createSparkle(){
 
 const s=document.createElement("div");
 s.classList.add("sparkle");
 
+/* posición */
+
 s.style.left=Math.random()*100+"vw";
 s.style.top=Math.random()*100+"vh";
 
+/* tamaños mezclados */
+
+let size=Math.random()*4+1;
+s.style.width=size+"px";
+s.style.height=size+"px";
+
+/* duración diferente */
+
+s.style.animationDuration=(Math.random()*3+1)+"s";
+
 document.body.appendChild(s);
 
-setTimeout(()=>{s.remove()},2000);
+setTimeout(()=>{s.remove()},5000);
 
 }
 
-setInterval(createSparkle,150);
+/* ahora hay más estrellas */
+
+setInterval(createSparkle,80);
 
 
 /* ABRIR SOBRE */
@@ -234,7 +264,7 @@ document.getElementById("envelope").classList.add("open");
 }
 
 
-/* CERRAR SOBRE AL HACER CLIC FUERA */
+/* CERRAR SOBRE */
 
 function closeEnvelope(event){
 
@@ -252,7 +282,7 @@ envelope.classList.remove("open");
 </script>
 
 </body>
-
 </html>
+
 
 
