@@ -17,6 +17,40 @@ text-align:center;
 overflow-x:hidden;
 }
 
+/* GALAXIA */
+
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle at 20% 30%,rgba(255,255,255,0.15),transparent 40%),
+radial-gradient(circle at 80% 60%,rgba(255,255,255,0.12),transparent 40%),
+radial-gradient(circle at 50% 80%,rgba(255,255,255,0.08),transparent 40%);
+animation:galaxy 60s linear infinite;
+z-index:-2;
+}
+
+@keyframes galaxy{
+from{transform:translate(0,0);}
+to{transform:translate(-200px,-200px);}
+}
+
+/* ---------- LUNA ---------- */
+
+.moon{
+position:fixed;
+top:60px;
+right:80px;
+width:120px;
+height:120px;
+background:radial-gradient(circle,#fff,#ddd);
+border-radius:50%;
+box-shadow:0 0 40px rgba(255,255,255,0.8);
+z-index:-1;
+}
+
 /* ---------- ESTRELLAS ---------- */
 
 .sparkle{
@@ -68,7 +102,7 @@ font-weight:bold;
 display:inline-block;
 margin-top:30px;
 
-background:rgba(255,255,255,0.85);
+background:rgba(255,255,255,0.9);
 color:black;
 
 border-radius:25px;
@@ -78,7 +112,6 @@ box-shadow:
 0 0 20px rgba(255,255,255,0.8),
 0 0 40px rgba(255,255,255,0.4);
 
-backdrop-filter:blur(6px);
 }
 
 /* ---------- CONTENIDO ---------- */
@@ -94,25 +127,19 @@ font-size:18px;
 margin-bottom:30px;
 }
 
-/* imagen flotante */
+/* IMAGEN FLOTANTE */
 
 img{
-
 max-width:100%;
 border-radius:12px;
-
 animation:float 4s ease-in-out infinite;
-
-box-shadow:0 0 25px rgba(255,255,255,0.25);
-
+box-shadow:0 0 25px rgba(255,255,255,0.3);
 }
 
 @keyframes float{
-
 0%{transform:translateY(0);}
 50%{transform:translateY(-10px);}
 100%{transform:translateY(0);}
-
 }
 
 /* ---------- BOTÓN ---------- */
@@ -143,14 +170,18 @@ transition:0.3s;
 
 box-shadow:0 0 15px rgba(255,105,180,0.7);
 
+animation:buttonGlow 3s infinite;
+
+}
+
+@keyframes buttonGlow{
+0%{box-shadow:0 0 15px rgba(255,105,180,0.7);}
+50%{box-shadow:0 0 35px rgba(255,105,180,1);}
+100%{box-shadow:0 0 15px rgba(255,105,180,0.7);}
 }
 
 button:hover{
-
 transform:scale(1.08);
-
-box-shadow:0 0 30px rgba(255,105,180,1);
-
 }
 
 /* ---------- SOBRE ---------- */
@@ -172,18 +203,7 @@ align-items:center;
 
 visibility:hidden;
 
-animation:fadeIn 0.4s;
-
 }
-
-@keyframes fadeIn{
-
-from{opacity:0;}
-to{opacity:1;}
-
-}
-
-/* SOBRE */
 
 .envelope{
 
@@ -267,10 +287,34 @@ transform:translateY(-140px);
 
 }
 
+/* CORAZONES */
+
+.heart{
+position:fixed;
+font-size:20px;
+animation:heartFloat 4s linear forwards;
+}
+
+@keyframes heartFloat{
+
+0%{
+transform:translateY(0);
+opacity:1;
+}
+
+100%{
+transform:translateY(-200px);
+opacity:0;
+}
+
+}
+
 </style>
 </head>
 
 <body>
+
+<div class="moon"></div>
 
 <header>
 ℱ𝒪ℛ ℳ𝒴 ℒ𝒪𝒱ℰ 🌷
@@ -293,8 +337,6 @@ Abrir Carta 💌
 </button>
 </footer>
 
-<!-- SOBRE -->
-
 <div id="envelopeContainer" onclick="closeEnvelope(event)">
 
 <div class="envelope" id="envelope">
@@ -311,7 +353,7 @@ Si te pones nerviosa no lo olvides, eres alguien capaz, con energia, experiencia
 
 <script>
 
-/* ---------- ESTRELLAS ---------- */
+/* ESTRELLAS */
 
 function createSparkle(){
 
@@ -336,8 +378,7 @@ setTimeout(()=>{s.remove()},6000);
 
 setInterval(createSparkle,70);
 
-
-/* ---------- ESTRELLAS FUGACES ---------- */
+/* ESTRELLAS FUGACES */
 
 function shootingStar(){
 
@@ -355,8 +396,7 @@ setTimeout(()=>{star.remove()},1200);
 
 setInterval(shootingStar,4000);
 
-
-/* ---------- ABRIR SOBRE ---------- */
+/* ABRIR SOBRE */
 
 function openEnvelope(){
 
@@ -368,10 +408,27 @@ setTimeout(()=>{
 document.getElementById("envelope").classList.add("open");
 },300);
 
+/* CORAZONES */
+
+for(let i=0;i<8;i++){
+
+let heart=document.createElement("div");
+heart.classList.add("heart");
+
+heart.innerHTML="❤️";
+
+heart.style.left=(45+Math.random()*10)+"vw";
+heart.style.top="60vh";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{heart.remove()},4000);
+
 }
 
+}
 
-/* ---------- CERRAR SOBRE ---------- */
+/* CERRAR SOBRE */
 
 function closeEnvelope(event){
 
