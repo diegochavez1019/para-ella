@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ella</title>
+
+<style>
+
+/* ---------- BASE ---------- */
+
+body{
+margin:0;
+font-family:Arial;
+background:black;
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+body.locked{
+overflow:hidden;
+}
+
+/* ---------- ESTRELLAS ---------- */
+
+.sparkle{
+position:fixed;
+background:white;
+border-radius:50%;
+opacity:0.9;
+animation:twinkle infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2;}
+to{opacity:1;}
+}
+
+/* ---------- TITULO ---------- */
+
+header{
+padding:20px;
+font-size:35px;
+font-weight:bold;
+display:inline-block;
+margin-top:20px;
+background:rgba(255,255,255,0.85);
+color:black;
+border-radius:25px;
+border:3px solid white;
+box-shadow:0 0 20px rgba(255,255,255,0.8);
+}
+
+/* ---------- CONTENIDO ---------- */
+
+main{
+padding:15px;
+max-width:800px;
+margin:auto;
+}
+
+.description{
+font-size:16px;
+margin-bottom:25px;
+padding:0 10px;
+}
+
+/* ---------- CARRUSEL ---------- */
+
+.carousel{
+position:relative;
+width:90%;
+max-width:400px;
+height:60vh;
+max-height:500px;
+margin:auto;
+overflow:hidden;
+background:rgba(255,255,255,0.05);
+border-radius:20px;
+padding:10px;
+}
+
+.track{
+display:flex;
+transition:transform 0.6s ease;
+height:100%;
+}
+
+.slide{
+min-width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100%;
+}
+
+.slide img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+border-radius:12px;
+box-shadow:0 0 25px rgba(255,255,255,0.25);
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
+}
+
+/* ---------- FLECHAS ---------- */
+
+.arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:30px;
+cursor:pointer;
+color:white;
+background:rgba(0,0,0,0.4);
+padding:8px;
+border-radius:50%;
+z-index:10;
+}
+
+.left{left:5px;}
+.right{right:5px;}
+
+/* ---------- BOTÓN ---------- */
+
+footer{
+margin-top:40px;
+}
+
+button{
+width:80%;
+max-width:300px;
+height:60px;
+font-size:18px;
+font-weight:bold;
+background:linear-gradient(45deg,#ff4da6,#ff66cc,#ff99dd);
+border:3px solid white;
+border-radius:15px;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* ---------- SOBRE (MODAL PRO) ---------- */
+
+#envelopeContainer{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.95);
+backdrop-filter:blur(8px);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+visibility:hidden;
+opacity:0;
+transition:0.4s;
+
+z-index:9999;
+}
+
+#envelopeContainer.active{
+visibility:visible;
+opacity:1;
+}
+
+/* SOBRE */
+
+.envelope{
+width:90%;
+max-width:420px;
+height:250px;
+background:#e0e0e0;
+position:relative;
+cursor:pointer;
+border-radius:10px;
+box-shadow:0 0 40px rgba(255,255,255,0.2);
+}
+
+/* TAPA */
+
+.flap{
+position:absolute;
+border-left:50% solid transparent;
+border-right:50% solid transparent;
+border-bottom:130px solid #d5d5d5;
+top:-130px;
+left:0;
+width:0;
+height:0;
+transition:1s;
+}
+
+/* CARTA */
+
+.letter{
+position:absolute;
+width:90%;
+height:200px;
+background:white;
+top:20px;
+left:5%;
+padding:15px;
+opacity:0;
+transition:1s;
+color:black;
+overflow:auto;
+border-radius:6px;
+font-size:14px;
+}
+
+/* ESTADO ABIERTO */
+
+.open .flap{
+transform:rotateX(180deg);
+}
+
+.open .letter{
+opacity:1;
+transform:translateY(-120px);
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+𝓗𝓞𝓛𝓐 𝓗𝓔𝓡𝓜𝓞𝓢𝓐 🌷
+</header>
+
+<main>
+
+<div class="description">
+Antes que nada queria aclararte algo y es que mis ojos solo te ven a ti, mi mente solo piensa en ti, mis oidos solo 
+  te escuchan a ti, mi boca solo habla de ti y quiere probarte a ti, mis labios quieren besarte a ti, mis dientes morder
+  tus labios, mi corazon se acelera por ti, mi cuerpo suda por ti, mis manos solo quieren tocarte a ti, mi alma solo quiere 
+  pertenecerte a ti y mi vida... esa ya es tuya. Asi que no tengas miedo. ❤️
+</div>
+
+<div class="carousel">
+
+<div class="arrow left" onclick="prev()">❮</div>
+
+<div class="track" id="track">
+
+<div class="slide"><img src="img1.jpg"></div>
+<div class="slide"><img src="img2.jpg"></div>
+<div class="slide"><img src="img3.jpg"></div>
+<div class="slide"><img src="img4.jpg"></div>
+<div class="slide"><img src="img5.jpg"></div>
+
+</div>
+
+<div class="arrow right" onclick="next()">❯</div>
+
+</div>
+
+</main>
+
+<footer>
+<button onclick="openEnvelope()">Abrir Carta 💌</button>
+</footer>
+
+<!-- MODAL -->
+
+<div id="envelopeContainer" onclick="closeEnvelope(event)">
+<div class="envelope" id="envelope">
+<div class="flap"></div>
+
+<div class="letter">
+<p>Estoy realmente orgulloso de ver como creces cada dia y poder ser parte de esos grandes y pequeños logros en tu vida. 
+    Realmente te amo y de corazon deseo que este nuevo trabajo te guste y te satisfaga asi como espero que sigas progresando 
+    y cumpliendo todos tus objetivos y tus sueños.</p>
+  
+  <p>Solo quiero desearte de corazon que tengas un gran primer dia en tu nuevo trabajo, espero que aprendas mucho y te 
+  esfuerces por mejorar. Tal vez estes nerviosa pero eso es bueno por que realmente te importa y ahora mismo tienes una 
+  muy buena oportunidad, solo no olvides nunca lo que vales, quien eres, todo lo que has trabajado y por lo que has pasado 
+  para llegar aqui. Eres una gran maestra y lo sabes, asi que esfuerzate y dalo todo preciosa.</p>
+  
+  <p>PD: No olvides que aqui tienes a un chico que aun que no es perfecto siempre te va a apoyar y estara en todos 
+    tus buenos y malos momentos, deseandote siempre lo mejor de corazón, te mando un beso y mucha suerte amor. ❤️</p>
+</div>
+
+</div>
+</div>
+
+<script>
+
+/* ---------- CARRUSEL ---------- */
+
+let index = 0;
+const track = document.getElementById("track");
+const slides = document.querySelectorAll(".slide");
+
+function update(){
+track.style.transform = `translateX(-${index * 100}%)`;
+}
+
+function next(){
+index = (index + 1) % slides.length;
+update();
+}
+
+function prev(){
+index = (index - 1 + slides.length) % slides.length;
+update();
+}
+
+setInterval(next, 5000);
+
+/* ---------- ESTRELLAS ---------- */
+
+function createSparkle(){
+const s=document.createElement("div");
+s.classList.add("sparkle");
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+let size=Math.random()*4+1;
+s.style.width=size+"px";
+s.style.height=size+"px";
+s.style.animationDuration=(Math.random()*3+1)+"s";
+document.body.appendChild(s);
+setTimeout(()=>{s.remove()},6000);
+}
+setInterval(createSparkle,70);
+
+/* ---------- SOBRE ---------- */
+
+function openEnvelope(){
+const container = document.getElementById("envelopeContainer");
+
+container.classList.add("active");
+document.body.classList.add("locked");
+
+setTimeout(()=>{
+document.getElementById("envelope").classList.add("open");
+},300);
+}
+
+function closeEnvelope(event){
+const envelope = document.getElementById("envelope");
+const container = document.getElementById("envelopeContainer");
+
+if(!envelope.contains(event.target)){
+container.classList.remove("active");
+document.body.classList.remove("locked");
+envelope.classList.remove("open");
+}
+}
+
+</script>
+
+</body>
+</html>
